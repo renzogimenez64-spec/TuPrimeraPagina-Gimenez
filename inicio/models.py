@@ -7,4 +7,4 @@ class Libro(models.Model):
     fecha_de_publicacion = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f"Titulo: {self.nombre} Autor:{self.autor} Generos:{self.genero} Fecha De Publicacion:{self.fecha_de_publicacion}"
+        return f"Titulo: {self.nombre} Autor: {self.autor} Generos: {self.genero} Fecha De Publicacion: {self.fecha_de_publicacion}"
