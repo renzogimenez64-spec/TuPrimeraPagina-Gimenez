@@ -12,6 +12,12 @@
         <a href={%url 'lista_libros'%}>Libros</a>
     </nav>
     <h1>Libros</h1>
-    {{lista_libros}}
+    <ul>
+        {% for libros in lista_libros %}
+        <li>
+            {{libros}}
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

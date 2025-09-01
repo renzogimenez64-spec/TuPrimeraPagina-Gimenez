@@ -6,7 +6,6 @@ def inicio(request):
     return render(request, 'inicio/index.html') 
 
 def crear_libro(request):
-
     if request.method == "POST":
         print(request.POST)
         formulario = CrearLibro(request.POST)
@@ -27,4 +26,4 @@ def crear_libro(request):
 
 def lista_libros(request):
     libros = Libro.objects.all()  
-    return render(request, 'inicio/lista_libros.html', {'libros_libros': libros})
+    return render(request, 'inicio/lista_libros.html', {'lista_libros': libros})
