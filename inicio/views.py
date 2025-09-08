@@ -13,13 +13,14 @@ def crear_libro(request):
             nombre_nuevo = formulario.cleaned_data.get('nombre')
             autor_nuevo = formulario.cleaned_data.get('autor')
             genero_nuevo = formulario.cleaned_data.get('genero')
-            fecha_nueva = formulario.cleaned_data.get('genero')
+            fecha_nueva = formulario.cleaned_data.get('fecha')
+            nueva_descripcion = formulario.cleaned_data.get('descripcion'),
             
 
-            libro = Libro(nombre=nombre_nuevo, autor=autor_nuevo, genero=genero_nuevo, fecha_de_publicacion=fecha_nueva,)
+            libro = Libro(nombre=nombre_nuevo, autor=autor_nuevo, genero=genero_nuevo, descripcion=nueva_descripcion, fecha_de_publicacion=fecha_nueva,)
             libro.save()
 
-            return redirect('inicio')
+            return redirect('lista_libros')
     else:   
         formulario = CrearLibro()
     return render(request, 'inicio/crear_libro.html', {'formulario': formulario})
