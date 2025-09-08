@@ -27,3 +27,9 @@ def crear_libro(request):
 def lista_libros(request):
     libros = Libro.objects.all()  
     return render(request, 'inicio/lista_libros.html', {'lista_libros': libros})
+
+def detalle_libro(request, libro_id):
+
+    libro = Libro.objects.get(id=libro_id)
+
+    return render(request, 'inicio/detalle_libro.html', {'libro': libro})
