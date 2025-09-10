@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect 
 from inicio.models import Libro
 from inicio.forms import CrearLibro
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 def inicio(request):
@@ -46,3 +46,7 @@ class ActualizarLibro(UpdateView):
     fields = "__all__"
     success_url = reverse_lazy('lista_libros')
      
+class EliminarLibro(DeleteView):
+    model = Libro
+    template_name = "inicio/eliminar_libro.html"
+    success_url = reverse_lazy('lista_libros') 

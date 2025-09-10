@@ -18,6 +18,7 @@
             {{libro}}
             <a href={% url "detalle_libro" libro.id%}>Ver</a>
             <a href={% url "actualizar_libro" libro.id%}>Actualizar</a>
+            <a href={% url "eliminar_libro" libro.id%}>Eliminar</a>
         </li>
         {% endfor %}
     </ul>
