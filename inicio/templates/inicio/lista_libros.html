@@ -2,6 +2,7 @@
 {% extends "base.html" %}
 {% block contenido%}
 <h1>Libros en la Biblioteca</h1>
+<a href={%url 'crear_libro'%}>Crear libro</a>
     <ul>
         {% for libro in lista_libros %}
         <li>

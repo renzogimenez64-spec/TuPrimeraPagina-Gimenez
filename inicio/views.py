@@ -3,10 +3,13 @@ from inicio.models import Libro
 from inicio.forms import CrearLibro
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def inicio(request):
     return render(request, 'inicio/index.html') 
 
+@login_required
 def crear_libro(request):
     if request.method == "POST":
         print(request.POST)
@@ -39,14 +42,14 @@ def detalle_libro(request, libro_id):
 
 # def actualizar_libro(request, libro_id)
 
-class ActualizarLibro(UpdateView):
+class ActualizarLibro(LoginRequiredMixin, UpdateView):
 
     model = Libro
     template_name = "inicio/actualizar_libro.html"
     fields = "__all__"
     success_url = reverse_lazy('lista_libros')
      
-class EliminarLibro(DeleteView):
+class EliminarLibro(LoginRequiredMixin, DeleteView):
     model = Libro
     template_name = "inicio/eliminar_libro.html"
     success_url = reverse_lazy('lista_libros') 
