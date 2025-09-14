@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login as auth_login
+from usuarios.forms import Register
 
 def login(request):
     if request.method == "POST":
@@ -8,10 +9,23 @@ def login(request):
         if form_login.is_valid():
             user = form_login.get_user()
 
-            login(request, user)
+            auth_login(request, user)
 
             return redirect('inicio')
     else:
         form_login = AuthenticationForm()
 
     return render(request, 'usuarios/iniciar_sesion.html', {'form_login': form_login})
+
+def register(request):
+
+    if request.method == "POST":
+        form = Register(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return redirect("iniciar_sesion")
+    else:
+        form = Register()
+
+    return render(request, 'usuarios/registro.html', {'form': form})
