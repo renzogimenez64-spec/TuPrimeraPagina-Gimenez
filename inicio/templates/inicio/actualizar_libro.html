@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block contenido%}
-<form action={%url "actualizar_libro" libro.id%} method="POST">
+<form action={%url "actualizar_libro" libro.id%} method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form}}
         <input type="submit" value="Actualizar">

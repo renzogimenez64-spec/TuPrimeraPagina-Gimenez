@@ -12,6 +12,9 @@
         <a href={%url 'lista_libros'%}>Libros</a>
 
         {% if request.user.is_authenticated %}
+            {% if request.user.userdata.avatar.url %}
+            <img src={{request.user.userdata.avatar.url}} alt="Avatar" height="40px">
+            {% endif %}
         <a href={% url 'perfil' %}>{{request.user.username}}</a>
         <form action={% url "cerrar_sesion" %} method="post">
             {% csrf_token %}

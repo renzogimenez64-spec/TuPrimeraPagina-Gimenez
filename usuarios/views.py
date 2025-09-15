@@ -4,6 +4,7 @@ from django.contrib.auth import login as auth_login
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView
+from usuarios.models import UserData
 from usuarios.forms import Register, EditProfileForm, EditPasswordForm
 
 def login(request):
@@ -14,6 +15,7 @@ def login(request):
 
             auth_login(request, user)
 
+            UserData.objects.get_or_create(user=user)
             return redirect('inicio')
     else:
         form_login = AuthenticationForm()
@@ -40,13 +42,20 @@ def profile(request):
 @login_required
 def edit_profile(request):
 
+    userdata = request.user.userdata
+
     if request.method == "POST":
-        form = EditProfileForm(request.POST, instance=request.user)
+        form = EditProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
+
+            new_avatar = form.cleaned_data.get('avatar')
+            if new_avatar:
+                userdata.avatar = new_avatar
+            userdata.save()
             form.save()
             return redirect('perfil')
     else:
-        form = EditProfileForm(instance=request.user)
+        form = EditProfileForm(instance=request.user, initial={'avatar': request.user.userdata.avatar})
 
     return render(request, 'usuarios/editar_perfil.html', {'form': form})
 

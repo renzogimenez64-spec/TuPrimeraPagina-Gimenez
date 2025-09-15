@@ -25,14 +25,13 @@ class EditProfileForm(UserChangeForm):
     email = forms.EmailField()
     first_name = forms.CharField(label='Nombre')
     last_name = forms.CharField(label='Apellido')
+    avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
         fields = ['email', 'first_name', 'last_name']
         help_texts = {llave: '' for llave in fields}
-
-from django.contrib.auth.forms import PasswordChangeForm
-
+ 
 class EditPasswordForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

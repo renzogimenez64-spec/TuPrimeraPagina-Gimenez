@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% block contenido%}
 <h1>{{libro.nombre}}</h1>
+
     <ul>
+        <li>
+            {% if libro.portada %}
+            <img src={{libro.portada.url}} alt="Portad del Libro">
+            {% endif %}
+        </li>
         <li>
             Autor: {{libro.autor}}
         </li>

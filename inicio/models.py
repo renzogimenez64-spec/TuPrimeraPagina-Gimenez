@@ -1,6 +1,7 @@
 from django.db import models
 
 class Libro(models.Model):
+    portada = models.ImageField(upload_to='portadas_libros', null=True)
     nombre = models.CharField(max_length=50)
     autor = models.CharField(max_length=50)
     genero = models.CharField(max_length=50)

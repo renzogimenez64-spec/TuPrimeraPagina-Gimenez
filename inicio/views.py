@@ -13,16 +13,17 @@ def inicio(request):
 def crear_libro(request):
     if request.method == "POST":
         print(request.POST)
-        formulario = CrearLibro(request.POST)
+        formulario = CrearLibro(request.POST, request.FILES)
         if formulario.is_valid():
             nombre_nuevo = formulario.cleaned_data.get('nombre')
             autor_nuevo = formulario.cleaned_data.get('autor')
             genero_nuevo = formulario.cleaned_data.get('genero')
             fecha_nueva = formulario.cleaned_data.get('fecha')
-            nueva_descripcion = formulario.cleaned_data.get('descripcion'),
+            nueva_descripcion = formulario.cleaned_data.get('descripcion')
+            nueva_portada = formulario.cleaned_data.get('portada')
             
 
-            libro = Libro(nombre=nombre_nuevo, autor=autor_nuevo, genero=genero_nuevo, descripcion=nueva_descripcion, fecha_de_publicacion=fecha_nueva,)
+            libro = Libro(nombre=nombre_nuevo, autor=autor_nuevo, genero=genero_nuevo, descripcion=nueva_descripcion, fecha_de_publicacion=fecha_nueva, portada=nueva_portada,)
             libro.save()
 
             return redirect('lista_libros')
