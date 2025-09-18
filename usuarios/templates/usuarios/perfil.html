@@ -1,10 +1,24 @@
 {% extends "base.html" %}
 {% block contenido%}
+    <div class="profile-card">
     <h1>Perfil</h1>
-    <p>Nombre de usuario: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Nombre: {{ user.first_name }}</p>
-    <p>Apellido: {{ user.last_name }}</p>
-    <a href={% url "editar_perfil" %}>Modificar datos de usuario</a>
-    <a href={% url "editar_contrasenia" %}>Cambiar Contraseñas</a>
+
+    {% if user.userdata.avatar.url %}
+        <div class="profile-avatar">
+            <img src="{{ user.userdata.avatar.url }}" alt="Avatar del Usuario">
+        </div>
+    {% endif %}
+
+    <div class="profile-info">
+        <p><span class="label">Nombre de usuario:</span> {{ user.username }}</p>
+        <p><span class="label">Email:</span> {{ user.email }}</p>
+        <p><span class="label">Nombre:</span> {{ user.first_name }}</p>
+        <p><span class="label">Apellido:</span> {{ user.last_name }}</p>
+    </div>
+
+    <div class="profile-actions">
+        <a href="{% url 'editar_perfil' %}" class="btn-profile">Modificar datos de usuario</a>
+        <a href="{% url 'editar_contrasenia' %}" class="btn-profile">Cambiar Contraseña</a>
+    </div>
+</div>
 {% endblock contenido%}

@@ -1,9 +1,11 @@
 
 {% extends "base.html" %}
 {% block contenido%}
-<form action={%url "eliminar_libro" libro.id%} method="POST">
+<div class="delete-card">
+    <p class="delete-warning">¿Estás seguro de que querés eliminar este libro?</p>
+    <form action="{% url 'eliminar_libro' libro.id %}" method="POST">
         {% csrf_token %}
-        <p>Eliminar</p>
-        <input type="submit" value="Eliminar">
+        <input type="submit" value="Eliminar" class="btn-delete">
     </form>
+</div>
 {% endblock contenido%}

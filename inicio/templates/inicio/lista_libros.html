@@ -1,16 +1,31 @@
 
 {% extends "base.html" %}
 {% block contenido%}
-<h1>Libros en la Biblioteca</h1>
-<a href={%url 'crear_libro'%}>Crear libro</a>
-    <ul>
-        {% for libro in lista_libros %}
-        <li>
-            {{libro}}
-            <a href={% url "detalle_libro" libro.id%}>Ver</a>
-            <a href={% url "actualizar_libro" libro.id%}>Actualizar</a>
-            <a href={% url "eliminar_libro" libro.id%}>Eliminar</a>
-        </li>
-        {% endfor %}
-    </ul>
+<div class="books-header">
+    <a href="{% url 'crear_libro' %}" class="btn-crear">Crear libro</a>
+    <h1 class="Book_List">Libros en la Biblioteca</h1>
+</div>
+
+<div class="books-grid">
+    {% for libro in lista_libros %}
+        <div class="book-card">
+            {% if libro.portada %}
+            <div class="book-cover">
+                <img src="{{ libro.portada.url }}" alt="Portada de {{ libro.nombre }}">
+            </div>
+            {% endif %}
+            <div class="book-info">
+                <p><span class="label">Título:</span> {{ libro.nombre }}</p>
+                <p><span class="label">Autor:</span> {{ libro.autor }}</p>
+                <p><span class="label">Género:</span> {{ libro.genero }}</p>
+                <p><span class="label">Publicación:</span> {{ libro.fecha_de_publicacion }}</p>
+            </div>
+            <div class="book-actions">
+                <a href="{% url 'detalle_libro' libro.id %}">Ver</a>
+                <a href="{% url 'actualizar_libro' libro.id %}">Actualizar</a>
+                <a href="{% url 'eliminar_libro' libro.id %}">Eliminar</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
 {% endblock contenido%}

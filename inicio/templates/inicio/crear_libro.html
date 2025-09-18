@@ -1,8 +1,36 @@
 {% extends "base.html" %}
-{% block contenido%}
-<form action={%url "crear_libro"%} method="POST" enctype="multipart/form-data">
+{% block title %}Crear Libro{% endblock %}
+{% block contenido %}
+<div class="form-card create-book-card">
+    <h1>Crear Libro</h1>
+
+    <form action="{% url 'crear_libro' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{formulario}}
-        <input type="submit" value="Crear">
+
+        {% if form.portada %}
+        <div class="form-cover">
+            <p class="label">Portada:</p>
+            {{ form.portada }}
+        </div>
+        {% endif %}
+
+        <div class="form-field">
+            <p><span class="label">Nombre:</span> {{ form.nombre }}</p>
+        </div>
+        <div class="form-field">
+            <p><span class="label">Autor:</span> {{ form.autor }}</p>
+        </div>
+        <div class="form-field">
+            <p><span class="label">Género:</span> {{ form.genero }}</p>
+        </div>
+        <div class="form-field">
+            <p><span class="label">Descripción:</span> {{ form.descripcion }}</p>
+        </div>
+        <div class="form-field">
+            <p><span class="label">Fecha de Publicación:</span> {{ form.fecha_de_publicacion }}</p>
+        </div>
+
+        <input type="submit" value="Crear" class="btn-submit">
     </form>
-{% endblock contenido%}
+</div>
+{% endblock contenido %}

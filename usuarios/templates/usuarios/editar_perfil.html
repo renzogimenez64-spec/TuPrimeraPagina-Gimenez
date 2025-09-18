@@ -1,9 +1,32 @@
 {% extends "base.html" %}
-{% block contenido%}
-<h1>Editar</h1>
-<form action={% url 'editar_perfil' %} method="POST" enctype="multipart/form-data">
+{% block contenido %}
+<div class="form-card update-profile-card">
+    <h1>Editar Perfil</h1>
+
+    <form action="{% url 'editar_perfil' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Actualizar">
+
+        {% if form.avatar %}
+        <div class="form-avatar">
+            <p class="label">Avatar:</p>
+            {{ form.avatar }}
+            {% if user.userdata.avatar.url %}
+                <img src="{{ user.userdata.avatar.url }}" alt="Avatar actual">
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="form-field">
+            <p><span class="label">Email:</span> {{ form.email }}</p>
+        </div>
+        <div class="form-field">
+            <p><span class="label">Nombre:</span> {{ form.first_name }}</p>
+        </div>
+        <div class="form-field">
+            <p><span class="label">Apellido:</span> {{ form.last_name }}</p>
+        </div>
+
+        <input type="submit" value="Actualizar" class="btn-submit">
     </form>
-{% endblock contenido%}
+</div>
+{% endblock contenido %}

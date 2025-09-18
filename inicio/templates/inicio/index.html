@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 
 {% block contenido%}
-    <header>
-        <h1>Inicio</h1>
-    </header>
+    <header class="inicio-header">
+    <h1>Bienvenido a la Biblioteca de Victor Sage</h1>
+    <p class="intro-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Explora nuestra colección de libros y descubre nuevas historias cada día.
+    </p>
+    <a href="{% url 'lista_libros' %}" class="btn-crear">Ver Libros</a>
+</header>
 {% endblock contenido%}
     

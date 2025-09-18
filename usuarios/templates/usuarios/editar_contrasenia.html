@@ -1,9 +1,22 @@
 {% extends "base.html" %}
-{% block contenido%}
-<h1>Editar</h1>
-<form action={% url 'editar_contrasenia' %} method="POST">
+{% block contenido %}
+<div class="form-card change-password-card">
+    <h1>Cambiar Contraseña</h1>
+
+    <form action="{% url 'editar_contrasenia' %}" method="POST">
         {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Actualizar">
+
+        <div class="form-field">
+            <p><span class="label">Contraseña actual:</span> {{ form.old_password }}</p>
+        </div>
+        <div class="form-field">
+            <p><span class="label">Nueva contraseña:</span> {{ form.new_password1 }}</p>
+        </div>
+        <div class="form-field">
+            <p><span class="label">Confirmar nueva contraseña:</span> {{ form.new_password2 }}</p>
+        </div>
+
+        <input type="submit" value="Actualizar" class="btn-submit">
     </form>
-{% endblock contenido%}
+</div>
+{% endblock contenido %}

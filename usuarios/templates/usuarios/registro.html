@@ -1,8 +1,18 @@
 {% extends "base.html" %}
-{% block contenido%}
-<form action={%url "registro"%} method="POST">
+{% block contenido %}
+<div class="form-card register-card">
+    <h1>Registrarse</h1>
+
+    <form action="{% url 'registro' %}" method="POST">
         {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Registrarse">
+
+        {% for field in form %}
+        <div class="form-field">
+            <p><span class="label">{{ field.label }}:</span> {{ field }}</p>
+        </div>
+        {% endfor %}
+
+        <input type="submit" value="Registrarse" class="btn-submit">
     </form>
-{% endblock contenido%}
+</div>
+{% endblock contenido %}

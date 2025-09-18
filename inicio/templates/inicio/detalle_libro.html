@@ -1,24 +1,21 @@
 {% extends "base.html" %}
 {% block contenido%}
-<h1>{{libro.nombre}}</h1>
+<h1 class="book-title">{{ libro.nombre }}</h1>
 
-    <ul>
-        <li>
-            {% if libro.portada %}
-            <img src={{libro.portada.url}} alt="Portad del Libro">
-            {% endif %}
-        </li>
-        <li>
-            Autor: {{libro.autor}}
-        </li>
-        <li>
-            Genero: {{libro.genero}}
-        </li>
-        <li>
-            Descripcion: {{libro.descripcion}}
-        </li>
-        <li>
-            Publicacion: {{libro.fecha_de_publicacion}}
-        </li>
-    </ul>
+<div class="book-detail">
+    {% if libro.portada %}
+    <div class="book-cover-detail">
+        <img src="{{ libro.portada.url }}" alt="Portada del Libro">
+    </div>
+    {% endif %}
+
+    <div class="book-info">
+        <ul>
+            <li><span class="label">Autor:</span> {{ libro.autor }}</li>
+            <li><span class="label">Género:</span> {{ libro.genero }}</li>
+            <li><span class="label">Descripción:</span> {{ libro.descripcion }}</li>
+            <li><span class="label">Publicación:</span> {{ libro.fecha_de_publicacion }}</li>
+        </ul>
+    </div>
+</div>
 {% endblock contenido%}
